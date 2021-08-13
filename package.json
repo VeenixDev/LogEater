@@ -1,0 +1,29 @@
+{
+  "name": "logeater",
+  "version": "1.0.0",
+  "description": "User Management and Login and Stuff you know",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "nodemon ./src/app.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VeenixDev/useri-managementeeee.git"
+  },
+  "author": "Paul Schmeing, Apostolos Vassiliou",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/VeenixDev/useri-managementeeee/issues"
+  },
+  "homepage": "https://github.com/VeenixDev/useri-managementeeee#readme",
+  "devDependencies": {
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.6.1",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.4",
+    "ts-node": "^10.2.0",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {}
+}
