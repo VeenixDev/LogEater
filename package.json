@@ -4,7 +4,7 @@
   "description": "User Management and Login and Stuff you know",
   "main": "dist/server.js",
   "scripts": {
-    "dev": "nodemon ./src/app.ts",
+    "dev": "ts-node ./src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
