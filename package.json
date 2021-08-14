@@ -12,8 +12,13 @@
     "type": "git",
     "url": "git+https://github.com/VeenixDev/LogEater.git"
   },
-  "author": "Paul Schmeing, Apostolos Vassiliou",
-  "license": "UNLICENSED",
+  "author": "VeenixDev, HrPlanlos",
+  "license": "BSL-1.0",
+  "keywords": [
+    "logeater",
+    "logger",
+    "log"
+  ],
   "bugs": {
     "url": "https://github.com/VeenixDev/LogEater/issues"
   },
