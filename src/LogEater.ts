@@ -65,4 +65,8 @@ export default class LogEater {
 
 		fs.appendFileSync(`${this.defaultDirectory}/${filename}`, `${message}\n`, { encoding: "utf-8" });
 	}
+
+	public static get defaultDirectory() {
+		return LogEater._defaultDirectory;
+	}
 }
