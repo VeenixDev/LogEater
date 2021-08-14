@@ -1,4 +1,4 @@
-export function getCallerName() {
+export function getCallerName(): string {
   try {
       throw new Error();
   }
@@ -9,4 +9,13 @@ export function getCallerName() {
           return '';
       }
   }
+}
+
+export function getTimeStamp(): string {
+    const date = new Date();
+
+    return `${String(date.getHours()).padStart(2, "0")}:` +
+        `${String(date.getMinutes()).padStart(2, "0")}:` +
+        `${String(date.getSeconds()).padStart(2, "0")}:` +
+        `${String(date.getMilliseconds()).padStart(4, "0")}`;
 }

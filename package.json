@@ -1,22 +1,23 @@
 {
   "name": "logeater",
   "version": "1.0.0",
-  "description": "User Management and Login and Stuff you know",
-  "main": "dist/server.js",
+  "description": "A simple to use, dependency free and lightweight logger for javascript",
+  "main": "dist/LogEater.js",
   "scripts": {
-    "dev": "ts-node ./src/app.ts",
+    "build-unix": "rm -rf dist && tsc",
+    "build": "del /F /S dist && tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/VeenixDev/useri-managementeeee.git"
+    "url": "git+https://github.com/VeenixDev/LogEater.git"
   },
   "author": "Paul Schmeing, Apostolos Vassiliou",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/VeenixDev/useri-managementeeee/issues"
+    "url": "https://github.com/VeenixDev/LogEater/issues"
   },
-  "homepage": "https://github.com/VeenixDev/useri-managementeeee#readme",
+  "homepage": "https://github.com/VeenixDev/LogEater#readme",
   "devDependencies": {
     "@types/jest": "^27.0.1",
     "@types/node": "^16.6.1",
