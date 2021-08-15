@@ -1,24 +1,13 @@
 import fs from "fs";
 
-import { getCallerName, getTimeStamp } from "./Utils";
-import LogLevel from "./LogLevel";
-import { Color } from "./LogLevel";
-import { Config } from "./LogEaterConfig";
+import { deepAssign, generateMessage, getDateStamp, getCallerName, replaceColorCode } from "./Utils";
+import LogLevel, { Level } from "./LogLevel";
+import Config, { defaultConfig as defaultCfg } from "./LogEaterConfig";
 
-
-export type Message = Exclude<any, undefined | null>;
+export type Message = any;
 
 export default class LogEater {
-  private static _defaultDirectory: string = "logs";
-  private static _defaultConfig: Config = {
-		default: {
-			path: 'logs',
-			console: true,
-			file: true
-		},
-		time: 'hh:mm:ss',
-		message: '[&{{time}}] &{{logLevel}} ({{caller}}): {{message}}'
-  };
+  private static _defaultConfig: Config = defaultCfg;
 
   public static info(message: Message, ...optionalParams: Array<any>): void {
     this.printer(LogLevel.INFO, message, ...optionalParams);
@@ -37,44 +26,59 @@ export default class LogEater {
   }
 
   private static printer(
-    logLevel: Color,
+    logLevel: Level,
     message: Message,
     ...optionalParams: Array<any>
   ): void {
-    if (message?.stack)
-      this.print(`[${getTimeStamp()}] ${logLevel} ${message.stack}`);
-    else this.print(`[${getTimeStamp()}] ${logLevel} ${message}`);
+    const caller = getCallerName(2);
 
-    if (optionalParams) {
-      for (let m of optionalParams) {
-        if (message?.stack)
-          this.print(`[${getTimeStamp()}] ${logLevel} ${m.stack}`);
-        else this.print(`[${getTimeStamp()}] ${logLevel} ${message}`);
-      }
+    this.print(generateMessage(message, this.defaultConfig, logLevel, caller), logLevel);
+
+    for (let oP of optionalParams) {
+      this.print(generateMessage(oP, this.defaultConfig, logLevel, caller), logLevel);
     }
   }
 
-  private static print(message: Message): void {
-    console.log(message);
+  private static print(message: Message, logLevel: Level): void {
+    console.log(message)
 
-    if (!fs.existsSync(this.defaultDirectory)) {
-      fs.mkdirSync(this.defaultDirectory, { recursive: true });
+    // Is needed because the logLevel contains color codes
+    logLevel = replaceColorCode(logLevel).toLowerCase();
+
+    const directory = this.defaultConfig[logLevel].path;
+
+    if (!fs.existsSync(directory)) {
+      fs.mkdirSync(directory, { recursive: true });
     }
 
-    const date = new Date();
-    const filename =
-      `${String(date.getMonth()).padStart(2, "0")}-` +
-      `${String(date.getDay()).padStart(2, "0")}-` +
-      `${String(date.getFullYear()).padStart(4, "0")}.log`;
+    message = replaceColorCode(message);
 
-    message = message.replace(/\u001b\[(.{1,2}m)|(.{1,2}m;1)/g, "");
-
-    fs.appendFileSync(`${this.defaultDirectory}/${filename}`, `${message}\n`, {
+    fs.appendFileSync(`${this.defaultConfig[logLevel].path}/${getDateStamp(this.defaultConfig.date)}.log`, `${message}\n`, {
       encoding: "utf-8",
     });
   }
 
-  public static get defaultDirectory() {
-    return LogEater._defaultDirectory;
+  public static get defaultConfig() {
+    return this._defaultConfig;
+  }
+
+  public static set defaultConfig(newConfig: Config) {
+    const exclude = ['time', 'message', 'default']
+
+    if (newConfig.default) {
+      for (const entry in this.defaultConfig) {
+        if(exclude.includes(entry)) {
+          continue;
+        }
+        
+        for (const option in newConfig['default']) {
+          if (this.defaultConfig[entry][option] === this.defaultConfig['default'][option]) {
+            this._defaultConfig[entry][option] = newConfig['default'][option];
+          }
+        }
+      }
+    }
+    
+    deepAssign(this.defaultConfig, newConfig);
   }
 }
