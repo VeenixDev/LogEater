@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A simple to use, dependency free and lightweight logger for javascript",
   "main": "dist/LogEater.js",
+  "types": "dits/LogEater.d.ts",
   "scripts": {
     "build-unix": "rm -rf dist && tsc",
     "build": "del /F /S dist && tsc",
@@ -12,8 +13,13 @@
     "type": "git",
     "url": "git+https://github.com/VeenixDev/LogEater.git"
   },
-  "author": "Paul Schmeing, Apostolos Vassiliou",
-  "license": "UNLICENSED",
+  "author": "VeenixDev, HrPlanlos",
+  "license": "BSL-1.0",
+  "keywords": [
+    "logeater",
+    "logger",
+    "log"
+  ],
   "bugs": {
     "url": "https://github.com/VeenixDev/LogEater/issues"
   },
