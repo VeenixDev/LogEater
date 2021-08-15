@@ -51,7 +51,7 @@ export function getTimeStamp(timeTemplate: string, timezone: string): string {
 export function getDateStamp(dateTemplate: string): string {
 	const date = new Date();
 
-	let finDate = dateTemplate;,
+	let finDate = dateTemplate;
 
 	finDate = finDate.replace(/yyyy/g, date.getFullYear().toString().padStart(4, "0"));
 	finDate = finDate.replace(/yy/g, date.getFullYear().toString().substr(-2).padStart(2, "0"));
