@@ -53,7 +53,7 @@ export default class LogEater {
 
     message = replaceColorCode(message);
 
-    fs.appendFileSync(`${this.defaultConfig[logLevel].path}/${getDateStamp(this.defaultConfig.date)}.log`, `${message}\n`, {
+    fs.appendFileSync(`${this.defaultConfig[logLevel].path}/${getDateStamp(this.defaultConfig.date, this.defaultConfig.timezone)}.log`, `${message}\n`, {
       encoding: "utf-8",
     });
   }

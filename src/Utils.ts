@@ -48,8 +48,8 @@ export function getTimeStamp(timeTemplate: string, timezone: string): string {
  * @param dateTemplate The templat how the date is structured
  * @return The current date
  */
-export function getDateStamp(dateTemplate: string): string {
-	const date = new Date();
+export function getDateStamp(dateTemplate: string, timezone: string): string {
+	const date = new Date(new Date().toLocaleString('en-US', { timeZone: timezone }).toString());
 
 	let finDate = dateTemplate;
 
@@ -95,8 +95,9 @@ export function isObject(object: any): boolean {
  * 
  * @param target The target object where the data gets assigned into
  * @param sources The source objects where the data gets copied from
+ * @return The target
  */
-export function deepAssign(target: Object, ...sources: Array<Object>): void {
+export function deepAssign(target: Object, ...sources: Array<Object>): Object {
   if(!sources?.length) return;
   
   if(isObject(target)) {
@@ -109,6 +110,7 @@ export function deepAssign(target: Object, ...sources: Array<Object>): void {
             Object.assign(target[entry], source[entry]);
           }
 
+          // TODO: Add check if target has object if not create one
           deepAssign(target[entry], source[entry]);
         } else {
           target[entry] = source[entry];
@@ -116,6 +118,8 @@ export function deepAssign(target: Object, ...sources: Array<Object>): void {
       }
     }
   }
+
+  return target;
 }
 
 /**
