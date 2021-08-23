@@ -15,11 +15,7 @@ export function getCallerName(level: number): string {
       throw new Error();
   }
   catch (e) {
-		try {
-				return e.stack.split('at ')[2 + level].split(' ')[0];
-		} catch (e) {
-				return '';
-		}
+		return e.stack.split('at ')[2 + level]?.split(' ')[0];
   }
 }
 

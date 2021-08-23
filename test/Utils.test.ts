@@ -9,7 +9,7 @@ describe('test utils file', () => {
   describe('test getCallerName function', () => {
     test('should return "myFunc"', () => {
       let name: string;
-      function myFunc() {myFunc2();}
+      function myFunc() { myFunc2(); }
       function myFunc2() {
         name = Utils.getCallerName(1);
       }
@@ -17,7 +17,19 @@ describe('test utils file', () => {
       myFunc();
 
       expect(name).toBe('myFunc');
-    });    
+    });
+    
+    test('should return undefined', () => {
+      let name: string;
+      function myFunc() { myFunc2(); }
+      function myFunc2() {
+        name = Utils.getCallerName(100);
+      }
+
+      myFunc();
+
+      expect(name).toBe(undefined);
+    })
   });
 
   describe('test getTimeStamp function', () => {
