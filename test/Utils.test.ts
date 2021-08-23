@@ -1,8 +1,24 @@
 import LogColors from '../src/LogColors';
+import { Message } from '../src/LogEater';
+import Config from '../src/LogEaterConfig';
+import { Level } from '../src/LogLevel';
 import * as Utils from '../src/Utils';
+import LogLevel from '../src/LogLevel';
 
 describe('test utils file', () => {
-  describe('test getCallerName function', () => {});
+  describe('test getCallerName function', () => {
+    test('should return "myFunc"', () => {
+      let name: string;
+      function myFunc() {myFunc2();}
+      function myFunc2() {
+        name = Utils.getCallerName(1);
+      }
+
+      myFunc();
+
+      expect(name).toBe('myFunc');
+    });    
+  });
 
   describe('test getTimeStamp function', () => {
     test('should return a "hh" formatted time', () => {
@@ -48,7 +64,62 @@ describe('test utils file', () => {
     });
   });
 
-  describe('test generateMessage function', () => {});
+  describe('test generateMessage function', () => {
+    // Find fix for Utils.replaceColorCode call
+    let config: Config = {
+      default: {
+        path: 'logs',
+        console: true,
+        file: true
+      },
+      info: {
+        path: 'logs',
+        console: true,
+        file: true
+      },
+      warning: {
+        path: 'logs',
+        console: true,
+        file: true
+      },
+      error: {
+        path: 'logs',
+        console: true,
+        file: true
+      },
+      debug: {
+        path: 'logs',
+        console: true,
+        file: true
+      },
+      timezone: 'Europe/Berlin',
+      date: 'yyyy-mm-dd',
+      time: 'hh:mm:ss:ms',
+      message: '[{{time}}] {{level}} ({{caller}}): {{message}}'
+    };
+    let message: Message = "hellow";
+    let caller: string = "caller";
+    test('should return INFO message', () => {
+      let level: Level = LogLevel.INFO;
+
+      expect(Utils.replaceColorCode(Utils.generateMessage(message, config, level, caller))).toMatch(/\[[0-9]{2}:[0-9]{2}:[0-9]{2}:[0-9]{4}\] INFO \(caller\): hellow/);
+    });
+    test('should return WARNING message', () => {
+      let level: Level = LogLevel.WARNING;
+
+      expect(Utils.replaceColorCode(Utils.generateMessage(message, config, level, caller))).toMatch(/\[[0-9]{2}:[0-9]{2}:[0-9]{2}:[0-9]{4}\] WARNING \(caller\): hellow/);
+    });
+    test('should return ERROR message', () => {
+      let level: Level = LogLevel.ERROR;
+
+      expect(Utils.replaceColorCode(Utils.generateMessage(message, config, level, caller))).toMatch(/\[[0-9]{2}:[0-9]{2}:[0-9]{2}:[0-9]{4}\] ERROR \(caller\): hellow/);
+    });
+    test('should return DEBUG message', () => {
+      let level: Level = LogLevel.DEBUG;
+
+      expect(Utils.replaceColorCode(Utils.generateMessage(message, config, level, caller))).toMatch(/\[[0-9]{2}:[0-9]{2}:[0-9]{2}:[0-9]{4}\] DEBUG \(caller\): hellow/);
+    });
+  });
 
   describe('test isObject function', () => {
     test('should return false for string', () => {
