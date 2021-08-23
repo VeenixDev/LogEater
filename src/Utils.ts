@@ -46,6 +46,7 @@ export function getTimeStamp(timeTemplate: string, timezone: string): string {
  * Gets the current date
  * 
  * @param dateTemplate The templat how the date is structured
+ * @param timezone The timezone you want to get the date from
  * @return The current date
  */
 export function getDateStamp(dateTemplate: string, timezone: string): string {
@@ -107,10 +108,10 @@ export function deepAssign(target: Object, ...sources: Array<Object>): Object {
         
         if(isObject(source[entry])) {
           if(!target[entry]) {
+            target[entry] = {}
             Object.assign(target[entry], source[entry]);
           }
 
-          // TODO: Add check if target has object if not create one
           deepAssign(target[entry], source[entry]);
         } else {
           target[entry] = source[entry];
