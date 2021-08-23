@@ -151,8 +151,6 @@ describe('test utils file', () => {
     test('should return merged object', () => {
       const obj1 = { data: 'test', moreData: { hello: 'World'}};
       const obj2 = { test: 'data', moreData: { world: 'Hello', evenMore: { data: 'myData' }}};
-
-      console.log('Hello')
     
       const result = { data: 'test', test: 'data', moreData: { hello: 'World', world: 'Hello', evenMore: { data: 'myData' }}};
       
