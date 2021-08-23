@@ -7,8 +7,8 @@
   "scripts": {
     "build-unix": "rm -rf dist && tsc",
     "build": "del /F /S dist && tsc",
-    "test:coverage": "jest --collect-coverage",
-    "test": "jest"
+    "test:coverage": "jest --config --coverage",
+    "test": "jest --config"
   },
   "repository": {
     "type": "git",

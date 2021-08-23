@@ -95,11 +95,11 @@ export function isObject(object: any): boolean {
  * @return The target
  */
 export function deepAssign(target: Object, ...sources: Array<Object>): Object {
-  if(!sources?.length) return;
+  if(!sources.length) return;
   
   if(isObject(target)) {
     for(let source of sources) {
-
+      
       for(let entry in source) {
         
         if(isObject(source[entry])) {

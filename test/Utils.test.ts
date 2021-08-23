@@ -5,7 +5,7 @@ import { Level } from '../src/LogLevel';
 import * as Utils from '../src/Utils';
 import LogLevel from '../src/LogLevel';
 
-describe('test utils file', () => {
+describe('test Utils file', () => {
   describe('test getCallerName function', () => {
     test('should return "myFunc"', () => {
       let name: string;
@@ -131,6 +131,16 @@ describe('test utils file', () => {
 
       expect(Utils.replaceColorCode(Utils.generateMessage(message, config, level, caller))).toMatch(/\[[0-9]{2}:[0-9]{2}:[0-9]{2}:[0-9]{4}\] DEBUG \(caller\): hellow/);
     });
+
+    test('should return INFO with stacktrace', () => {
+      try {
+        throw new Error();
+      } catch(exception) {
+        let level: Level = LogLevel.INFO;
+
+        expect(Utils.replaceColorCode(Utils.generateMessage(exception, config, level, caller))).toMatch(/\[[0-9]{2}:[0-9]{2}:[0-9]{2}:[0-9]{4}\] INFO \(caller\): .*/);
+      }
+    });
   });
 
   describe('test isObject function', () => {
@@ -169,6 +179,22 @@ describe('test utils file', () => {
       Utils.deepAssign(obj1, obj2);
       expect(obj1).toEqual(result);
     });
+
+    test('should return obj1', () => {
+      const obj1 = { data: 'test', moreData: { hello: 'World'}};
+      const result = { data: 'test', moreData: { hello: 'World'}};
+      
+      Utils.deepAssign(obj1);
+      expect(obj1).toEqual(result);
+    });
+  });
+
+  test('should return merged object', () => {
+    const obj1 = "hellow";
+    const obj2 = { data: 'test', moreData: { hello: 'World'}};
+    
+    Utils.deepAssign(obj1, obj2);
+    expect(obj1).toEqual("hellow");
   });
 
   describe('test replaceColorCode function', () => {
