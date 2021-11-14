@@ -15,11 +15,7 @@ export function getCallerName(level: number): string {
       throw new Error();
   }
   catch (e) {
-		try {
-				return e.stack.split('at ')[2 + level].split(' ')[0];
-		} catch (e) {
-				return '';
-		}
+		return e.stack.split('at ')[2 + level]?.split(' ')[0];
   }
 }
 
@@ -46,10 +42,11 @@ export function getTimeStamp(timeTemplate: string, timezone: string): string {
  * Gets the current date
  * 
  * @param dateTemplate The templat how the date is structured
+ * @param timezone The timezone you want to get the date from
  * @return The current date
  */
-export function getDateStamp(dateTemplate: string): string {
-	const date = new Date();
+export function getDateStamp(dateTemplate: string, timezone: string): string {
+	const date = new Date(new Date().toLocaleString('en-US', { timeZone: timezone }).toString());
 
 	let finDate = dateTemplate;
 
@@ -95,17 +92,19 @@ export function isObject(object: any): boolean {
  * 
  * @param target The target object where the data gets assigned into
  * @param sources The source objects where the data gets copied from
+ * @return The target
  */
-export function deepAssign(target: Object, ...sources: Array<Object>): void {
-  if(!sources?.length) return;
+export function deepAssign(target: Object, ...sources: Array<Object>): Object {
+  if(!sources.length) return;
   
   if(isObject(target)) {
     for(let source of sources) {
-
+      
       for(let entry in source) {
         
         if(isObject(source[entry])) {
           if(!target[entry]) {
+            target[entry] = {}
             Object.assign(target[entry], source[entry]);
           }
 
@@ -116,6 +115,8 @@ export function deepAssign(target: Object, ...sources: Array<Object>): void {
       }
     }
   }
+
+  return target;
 }
 
 /**

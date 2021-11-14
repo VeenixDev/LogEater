@@ -53,7 +53,7 @@ export default class LogEater {
 
     message = replaceColorCode(message);
 
-    fs.appendFileSync(`${this.defaultConfig[logLevel].path}/${getDateStamp(this.defaultConfig.date)}.log`, `${message}\n`, {
+    fs.appendFileSync(`${this.defaultConfig[logLevel].path}/${getDateStamp(this.defaultConfig.date, this.defaultConfig.timezone)}.log`, `${message}\n`, {
       encoding: "utf-8",
     });
   }
@@ -63,7 +63,7 @@ export default class LogEater {
   }
 
   public static set defaultConfig(newConfig: Config) {
-    const exclude = ['time', 'message', 'default']
+    const exclude = ['time', 'message', 'default'];
 
     if (newConfig.default) {
       for (const entry in this.defaultConfig) {

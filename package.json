@@ -7,7 +7,8 @@
   "scripts": {
     "build-unix": "rm -rf dist && tsc",
     "build": "del /F /S dist && tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:coverage": "jest --config --coverage",
+    "test": "jest --config"
   },
   "repository": {
     "type": "git",
