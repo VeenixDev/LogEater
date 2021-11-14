@@ -1,8 +1,10 @@
 import Config from "../src/LogEaterConfig";
 import LogEater from "../src/LogEater";
 import { mocked } from 'ts-jest/utils';
+import fs from 'fs';
 
 global.console.log = jest.fn();
+fs.existsSync = jest.fn().mockReturnValue(false);
 
 const promises = {
   appendFile: jest.fn()
@@ -56,11 +58,22 @@ describe('test LogEater functions', () => {
     });
   });
 
+  describe('optional parameter', () => {
+    test('should loop over the optional parameter', () => {
+      LogEater.debug('optional', 'parameters');
+
+      expect(global.console.log).toBeCalled();
+    });
+  });
+
   describe('test setter for defaultConfig', () => {
     test('should update defaultConfig', () => {
       const def = {...LogEater.defaultConfig};
 
       LogEater.defaultConfig = {
+        default: {
+          console: false,
+        },
         timezone: 'Europe/Berlin',
         date: 'dd-mm-yyyy',
         time: 'hh:mm:ss',

@@ -63,7 +63,7 @@ export default class LogEater {
   }
 
   public static set defaultConfig(newConfig: Config) {
-    const exclude = ['time', 'message', 'default']
+    const exclude = ['time', 'message', 'default'];
 
     if (newConfig.default) {
       for (const entry in this.defaultConfig) {
