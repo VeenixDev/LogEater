@@ -5,6 +5,10 @@ build
 .eslintrc.json
 .gitignore
 .travis.yml
+.github
 rollup.config.dev.js
 rollup.config.js
 yarn-error.log
+coverage
+dist/test
+dist/jest*
