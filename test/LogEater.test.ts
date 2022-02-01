@@ -1,5 +1,5 @@
 import Config from "../src/LogEaterConfig";
-import LogEater from "../src/LogEater";
+import LogEater from "../src";
 import { mocked } from 'jest-mock';
 import fs from 'fs';
 

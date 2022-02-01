@@ -1,5 +1,5 @@
 import LogColors from '../src/LogColors';
-import { Message } from '../src/LogEater';
+import { Message } from '../src';
 import Config from '../src/LogEaterConfig';
 import { Level } from '../src/LogLevel';
 import * as Utils from '../src/Utils';
