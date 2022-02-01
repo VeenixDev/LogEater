@@ -1,5 +1,7 @@
 import fs from "fs";
 
+type PropType<TObj, TProp extends keyof TObj> = TObj[TProp];
+
 import { deepAssign, generateMessage, getDateStamp, getCallerName, replaceColorCode } from "./Utils";
 import LogLevel, { Level } from "./LogLevel";
 import Config, { defaultConfig as defaultCfg } from "./LogEaterConfig";
@@ -39,13 +41,14 @@ export default class LogEater {
     }
   }
 
-  private static print(message: Message, logLevel: Level): void {
+  private static print(message: Message, logLevel: PropType<Config, 'error'>): void {
     console.log(message)
 
     // Is needed because the logLevel contains color codes
-    logLevel = replaceColorCode(logLevel).toLowerCase();
+    let logLevelValue: string = replaceColorCode(logLevel).toLowerCase();
 
-    const directory = this.defaultConfig[logLevel].path;
+    const directory: string = this.defaultConfig[logLevel].path;
+
 
     if (!fs.existsSync(directory)) {
       fs.mkdirSync(directory, { recursive: true });
@@ -58,7 +61,7 @@ export default class LogEater {
     });
   }
 
-  public static get defaultConfig() {
+  public static get defaultConfig(): Config {
     return this._defaultConfig;
   }
 
