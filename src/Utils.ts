@@ -1,4 +1,4 @@
-import { Message } from "./LogEater";
+import { Message } from ".";
 import Config from "./LogEaterConfig";
 import { Level } from "./LogLevel";
 

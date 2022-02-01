@@ -13,3 +13,7 @@ coverage
 dist/test
 dist/jest*
 test
+node_modules
+jest.config.ts
+TODO.md
+tsconfig.md
