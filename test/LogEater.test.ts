@@ -14,7 +14,7 @@ describe('test LogEater functions', () => {
   const config: Config = LogEater.defaultConfig;
   const date = new Date(new Date().toLocaleString('en-US', { timeZone: config.timezone }).toString());
 
-  let finDate = config.message;
+  let finDate = config.message || '';
 
   finDate = finDate.replace(/yyyy/g, date.getFullYear().toString().padStart(4, "0"));
   finDate = finDate.replace(/yy/g, date.getFullYear().toString().substr(-2).padStart(2, "0"));

@@ -2,7 +2,7 @@
   "name": "logeater",
   "version": "1.0.4",
   "description": "A simple to use, dependency free and lightweight logger for javascript",
-  "main": "dist/src/LogEater.js",
+  "main": "dist/src/index.js",
   "types": "dist/src/LogEater.d.ts",
   "scripts": {
     "build-unix": "rm -rf dist && tsc",

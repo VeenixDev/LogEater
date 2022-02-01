@@ -1,31 +1,31 @@
 /* Config usable for a Logger */
 export default interface Config {
   /** Default options */
-  default?: LogOptions;
+  "default"?: LogOptions;
 
   /** LogLevel error options */
-  error?: LogOptions;
+  "error"?: LogOptions;
 
   /** LogLevel warning options */
-  warning?: LogOptions;
+  "warning"?: LogOptions;
 
   /** LogLevel info options */
-  info?: LogOptions;
+  "info"?: LogOptions;
 
   /** LogLevel debug options */
-  debug?: LogOptions;
+  "debug"?: LogOptions;
 
   /** The timezone you are located in */
-  timezone?: string;
+  "timezone"?: string;
 
   /** File date template */
-  date?: string;
+  "date"?: string;
 
   /** Log time template */
-  time?: string;
+  "time"?: string;
 
   /** Message template */
-  message?: string;
+  "message"?: string;
 };
 
 /** The options for a LogLevel */

@@ -20,7 +20,7 @@ describe('test Utils file', () => {
     });
     
     test('should return undefined', () => {
-      let name: string;
+      let name: string = '';
       function myFunc() { myFunc2(); }
       function myFunc2() {
         name = Utils.getCallerName(100);
