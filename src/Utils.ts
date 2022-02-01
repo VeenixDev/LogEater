@@ -70,7 +70,7 @@ export function generateMessage(message: Message, config: Config, logLevel: Leve
   let finMsg = config.message;
 	
   finMsg = finMsg.replace(/{{message}}/g, message.stack ? message.stack : message);
-  finMsg = finMsg.replace(/{{time}}/g, this.getTimeStamp(config.time, config.timezone));
+  finMsg = finMsg.replace(/{{time}}/g, getTimeStamp(config.time, config.timezone));
   finMsg = finMsg.replace(/{{level}}/g, logLevel);
   finMsg = finMsg.replace(/{{caller}}/g, caller);
 

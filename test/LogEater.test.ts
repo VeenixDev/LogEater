@@ -1,6 +1,6 @@
 import Config from "../src/LogEaterConfig";
 import LogEater from "../src/LogEater";
-import { mocked } from 'ts-jest/utils';
+import { mocked } from 'jest-mock';
 import fs from 'fs';
 
 global.console.log = jest.fn();
