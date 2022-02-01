@@ -1,6 +1,6 @@
 {
   "name": "logeater",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A simple to use, dependency free and lightweight logger for javascript",
   "main": "dist/src/index.js",
   "types": "dist/src/LogEater.d.ts",
